@@ -6,9 +6,14 @@ var p1;
 var p2;
 var p3;
 
+var acumPP;
+var ppactores;
+var pppelis;
+
 $(document).ready(function () {
     acumCantidad = 0;
     acumPelisString = 0;
+    acumPP = 0;
     pintarEspera();
     loadCacheElements();
 });
@@ -21,12 +26,16 @@ function loadCacheElements() {
     getMoviesRatingUnder5Count();
     getMoviesRatingBetween5And7Count();
     getMoviesRatingOver7Count();
+    getMovieInformationType1();
+    getMovieInformationType2();
+    getMovieInformationType3();
+    getMoviesAndActors();
 }
 
 function getMoviesRatingUnder5Count() {
     result = sessionStorage.getItem("cantidadPeliculas1");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=0-5",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=0-5",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas1", result);
                 p1 = parseInt(result);
@@ -39,20 +48,10 @@ function getMoviesRatingUnder5Count() {
     pintarGrafica2();
 }
 
-function getMoviesRatingUnder5() {
-    result = sessionStorage.getItem("peliculasTipo1");
-    if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=0-5",
-            success: function (result) {
-                sessionStorage.setItem("peliculasTipo1", result);
-            }});
-    }
-}
-
 function getMoviesRatingBetween5And7Count() {
     result = sessionStorage.getItem("cantidadPeliculas2");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=6-8",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=6-8",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas2", result);
                 p2 = parseInt(result);
@@ -61,25 +60,14 @@ function getMoviesRatingBetween5And7Count() {
     } else {
         p2 = parseInt(result);
         acumCantidad++;
-
     }
     pintarGrafica2();
-}
-
-function getMoviesRatingBetween5And7() {
-    result = sessionStorage.getItem("peliculasTipo2");
-    if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=6-8",
-            success: function (result) {
-                sessionStorage.setItem("peliculasTipo2", result);
-            }});
-    }
 }
 
 function getMoviesRatingOver7Count() {
     result = sessionStorage.getItem("cantidadPeliculas3");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=9-10",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=9-10",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas3", result);
                 p3 = parseInt(result);
@@ -93,80 +81,121 @@ function getMoviesRatingOver7Count() {
 }
 
 
-function getMoviesRatingOver7() {
-    result = sessionStorage.getItem("peliculasTipo3");
-    if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=9-10",
-            success: function (result) {
-                sessionStorage.setItem("peliculasTipo3", result);
-            }});
-    }
-}
-
 function getMovieInformationType1() {
-    if ($('peliCat1').hasClass('active')) {
-        $('peliCat1').removeClass('active');
+    result = sessionStorage.getItem("peliculasTipo1");
+    if (result === null) {
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=0-5",
+            success: function (result) {
+                sessionStorage.setItem("peliculasTipo1", result);
+                acumPelisString++;
+                pintarGrafica2();
+            }});
     } else {
-        $('peliCat1').addClass('active');
-        getMoviesRatingUnder5();
-        result = sessionStorage.getItem("peliculasInfoTipo1");
-        if (result === null) {
-            peliculasTipo1 = sessionStorage.getItem("peliculasTipo1");
-            $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo1,
-                success: function (result) {
-                    sessionStorage.setItem("peliculasInfoTipo1", result);
-                    acumPelisString++;
-                    pintarGrafica2();
-                }});
-        }
+        acumPelisString++;
+        pintarGrafica2();
     }
 }
 
 function getMovieInformationType2() {
-    getMoviesRatingBetween5And7();
-    result = sessionStorage.getItem("peliculasInfoTipo2");
+    result = sessionStorage.getItem("peliculasTipo2");
     if (result === null) {
-        peliculasTipo2 = sessionStorage.getItem("peliculasTipo2");
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo2,
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=6-8",
             success: function (result) {
-                sessionStorage.setItem("peliculasInfoTipo2", result);
+                sessionStorage.setItem("peliculasTipo2", result);
                 acumPelisString++;
                 pintarGrafica2();
             }});
+    } else {
+        acumPelisString++;
+        pintarGrafica2();
     }
 }
 
 function getMovieInformationType3() {
-    getMoviesRatingOver7();
-    result = sessionStorage.getItem("peliculasInfoTipo3");
+    result = sessionStorage.getItem("peliculasTipo3");
     if (result === null) {
-        peliculasTipo3 = sessionStorage.getItem("peliculasTipo3");
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo3,
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=9-10",
             success: function (result) {
-                sessionStorage.setItem("peliculasInfoTipo3", result);
+                sessionStorage.setItem("peliculasTipo3", result);
                 acumPelisString++;
                 pintarGrafica2();
             }});
+    } else {
+        acumPelisString++;
+        pintarGrafica2();
     }
 }
 
+
 function getMovieInformation() {
     peliculasTipo1 = sessionStorage.getItem("peliculasTipo1");
-    var url = "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo1;
+    var url = "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo1;
     $.ajax({url: url,
         success: function (result) {
             $('#espera').append('<div>' + result + '</div>');
         }});
 }
 
+function getMoviesAndActors() {
+    result1 = sessionStorage.getItem("actoresPrincipales");
+    result2 = sessionStorage.getItem("cantidadPeliculasActores");
+    if (result1 === null) {
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=personas",
+            success: function (result1) {
+                sessionStorage.setItem("actoresPrincipales", result1);
+                //String to array
+                result1 = result1.replace('["',"");
+                result1 = result1.replace('"]',"");
+                result1 = result1.replace('\r\n',"");
+                result1 = result1.split('", "');
+                ppactores = result1;
+                acumPP++;
+            }});
+    } else {
+        //String to array
+        result1 = result1.replace('["',"");
+        result1 = result1.replace('"]',"");
+        result1 = result1.replace('\r\n',"");
+        result1 = result1.split('", "');
+        ppactores = result1;
+        acumPP++;
+    }
+    if (result2 === null) {
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=pelis",
+            success: function (result2) {
+                sessionStorage.setItem("cantidadPeliculasActores", result2);
+                //String to array
+                result2 = result2.replace('[',"");
+                result2 = result2.replace(']',"");
+                result2 = result2.replace('\r\n',"");
+                result2 = result2.split(', ').map(function(item) {
+                    return parseInt(item, 10);
+                });;
+                pppelis = result2;
+                acumPP++;
+            }});
+    } else {
+        result2 = result2.replace('[',"");
+        result2 = result2.replace(']',"");
+        result2 = result2.replace('\r\n',"");
+        result2 = result2.split(', ').map(function(item) {
+            return parseInt(item, 10);
+        });;
+        pppelis = result2;
+        acumPP++;
+    }
+    pintarGrafica2();
+}
+
 function pintarGrafica2() {
-    if ((acumCantidad === 3)) {
+    if ((acumPelisString === 3) && (acumCantidad === 3) && (acumPP === 2)) {
         $('#espera').empty();
         pie();
     }
 }
 
 function pie() {
+    //Contenedor con el gráfico tipo tarta
     Highcharts.chart('container', {
         chart: {
             plotBackgroundColor: null,
@@ -190,6 +219,9 @@ function pie() {
                 }
             }
         },
+        credits: {
+            enabled: false
+        },
         series: [{
                 name: 'Edades',
                 colorByPoint: true,
@@ -206,5 +238,42 @@ function pie() {
                         y: p3
                     }]
             }]
+    });
+    
+    //Contenedor con el gráfico de barras
+    Highcharts.chart('containerBarras', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Películas por persona'
+        },
+        xAxis: {
+            categories: ppactores
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Películas'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'column',
+            colorByPoint: true,
+            name: 'Películas',
+            data: pppelis,
+            showInLegend: false
+        }]
     });
 }
