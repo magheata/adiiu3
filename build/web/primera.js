@@ -104,10 +104,11 @@ function getMoviesRatingOver7() {
 }
 
 function getMovieInformationType1() {
-    if ($('peliCat1').hasClass('active')) {
-        $('peliCat1').removeClass('active');
+    var element = document.getElementById("peliCat1");
+    if (element.classList.contains("active")) {
+        element.classList.remove("active");
     } else {
-        $('peliCat1').addClass('active');
+        element.classList.add("active");
         getMoviesRatingUnder5();
         result = sessionStorage.getItem("peliculasInfoTipo1");
         if (result === null) {
@@ -123,40 +124,43 @@ function getMovieInformationType1() {
 }
 
 function getMovieInformationType2() {
-    getMoviesRatingBetween5And7();
-    result = sessionStorage.getItem("peliculasInfoTipo2");
-    if (result === null) {
-        peliculasTipo2 = sessionStorage.getItem("peliculasTipo2");
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo2,
-            success: function (result) {
-                sessionStorage.setItem("peliculasInfoTipo2", result);
-                acumPelisString++;
-                pintarGrafica2();
-            }});
+    var element = document.getElementById("peliCat2");
+    if (element.classList.contains("active")) {
+        element.classList.remove("active");
+    } else {
+        element.classList.add("active");
+        getMoviesRatingBetween5And7();
+        result = sessionStorage.getItem("peliculasInfoTipo2");
+        if (result === null) {
+            peliculasTipo2 = sessionStorage.getItem("peliculasTipo2");
+            $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo2,
+                success: function (result) {
+                    sessionStorage.setItem("peliculasInfoTipo2", result);
+                    acumPelisString++;
+                    pintarGrafica2();
+                }});
+        }
     }
 }
 
 function getMovieInformationType3() {
-    getMoviesRatingOver7();
-    result = sessionStorage.getItem("peliculasInfoTipo3");
-    if (result === null) {
-        peliculasTipo3 = sessionStorage.getItem("peliculasTipo3");
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo3,
-            success: function (result) {
-                sessionStorage.setItem("peliculasInfoTipo3", result);
-                acumPelisString++;
-                pintarGrafica2();
-            }});
+    var element = document.getElementById("peliCat3");
+    if (element.classList.contains("active")) {
+        element.classList.remove("active");
+    } else {
+        element.classList.add("active");
+        getMoviesRatingOver7();
+        result = sessionStorage.getItem("peliculasInfoTipo3");
+        if (result === null) {
+            peliculasTipo3 = sessionStorage.getItem("peliculasTipo3");
+            $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo3,
+                success: function (result) {
+                    sessionStorage.setItem("peliculasInfoTipo3", result);
+                    acumPelisString++;
+                    pintarGrafica2();
+                }});
+        }
     }
-}
-
-function getMovieInformation() {
-    peliculasTipo1 = sessionStorage.getItem("peliculasTipo1");
-    var url = "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo1;
-    $.ajax({url: url,
-        success: function (result) {
-            $('#espera').append('<div>' + result + '</div>');
-        }});
 }
 
 function pintarGrafica2() {

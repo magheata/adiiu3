@@ -61,9 +61,9 @@
 
                     <h1 class="my-4"> Peliculas por categoria </h1>
                     <div class="list-group">
-                        <a href="javascript:getMovieInformationType1();" class="list-group-item" id = "peliCat1">Peliculas con menos de 6 de nota</a>
-                        <a href="javascript:getMovieInformationType2();" class="list-group-item" id = "peliCat2">Peliculas con una nota entre 6 y 9</a>
-                        <a href="javascript:getMovieInformationType3();" class="list-group-item" id = "peliCat3">Peliculas con una nota superior a 9</a>
+                        <a href="javascript:getMovieInformationType1();" class="list-group-item peliCat" id = "peliCat1">Peliculas con menos de 6 de nota</a>
+                        <a href="javascript:getMovieInformationType2();" class="list-group-item peliCat" id = "peliCat2">Peliculas con una nota entre 6 y 9</a>
+                        <a href="javascript:getMovieInformationType3();" class="list-group-item peliCat" id = "peliCat3">Peliculas con una nota superior a 9</a>
                     </div>
 
                 </div>
