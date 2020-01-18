@@ -14,7 +14,7 @@ import meusservlets.MovieDBRepository;
  *
  * @author andreea
  */
-public class MovieService{
+public class MovieService {
 
     private MovieDBRepository movieDBRepository;
 
@@ -28,13 +28,18 @@ public class MovieService{
             return null;
         }
 
-        String [] moviesFromDB = moviesString.split(",");
+        String[] moviesFromDB = moviesString.split(",");
 
-        String movies = "{'movies':[";
+        String movies = "{\"movies\":[";
 
         for (int i = 0; i < moviesFromDB.length - 1; i++) {
             Movie movie = new Movie();
             String currentMovie = moviesFromDB[i].trim();
+            if (i == 0) {
+                currentMovie = currentMovie.substring(1, currentMovie.length());
+            } else if (i == moviesFromDB.length - 2) {
+                currentMovie = currentMovie.substring(0, currentMovie.length() - 2);
+            }
             String id = movieDBRepository.SearchMovieId(movie, currentMovie);
             if (!id.equals("")) {
                 String movieS = movieDBRepository.Get("movie", id);
@@ -42,7 +47,7 @@ public class MovieService{
                 movie = SetMovieParameters(movie, movieS);
                 if (movie != null) {
                     movie.setActors(GetActorsForMovieInfo(movie.Name));
-                    movies = movies + movie.toString();
+                    movies = movies + movie.toString() + ", ";
                 }
             }
         }
@@ -55,14 +60,12 @@ public class MovieService{
         DBActionsPersonaPeli dbPersonaPeli = new DBActionsPersonaPeli();
         List<Actor> actors = dbPersonaPeli.getActorsForMovie(movieName);
 
-        for (int i = 0; i < actors.size() - 1; i++) {
-            Actor actor = new Actor();
-            actor.setName(actors.get(i).Name);
-            String id = movieDBRepository.SearchActorId(actor);
+        for (int i = 0; i < actors.size(); i++) {
+            actors.get(i).setName(actors.get(i).Name);
+            String id = movieDBRepository.SearchActorId(actors.get(i));
             if (!id.equals("")) {
                 String actorS = movieDBRepository.Get("person", id);
-                actor = SetActorParameters(actor, actorS);
-                actors.add(actor);
+                SetActorParameters(actors.get(i), actorS);
             }
         }
         return actors;
@@ -75,7 +78,12 @@ public class MovieService{
             int indexFirst = movieResponse.indexOf("iso_3166_1");
             int indexLast = movieResponse.indexOf("name");
             if ((indexFirst > -1) && (indexLast > -1)) {
-                movie.setCountryOfOrigin(movieResponse.substring(indexFirst + 13, indexFirst + 15));
+                String country = movieResponse.substring(indexFirst + 13, indexFirst + 15);
+                if (!country.equals("ul")) {
+                    movie.setCountryOfOrigin(country);
+                } else {
+                    movie.setCountryOfOrigin("");
+                }
             }
 
             //Set Country of Origin
@@ -92,17 +100,38 @@ public class MovieService{
     }
 
     private Actor SetActorParameters(Actor actor, String actorResponse) {
-        int indexFirstCountry = -1; 
-        int indexLastCountry = -1;
+        int indexFirstCountry;
+        int indexLastCountry;
+        int indexFirstPopularity;
+        int indexFirstProfilePath;
+        int indexFirstAdult;
+
         try {
             //Set Country of Origin
             indexFirstCountry = actorResponse.indexOf("place_of_birth");
             indexLastCountry = actorResponse.indexOf("profile_path");
+            indexFirstPopularity = actorResponse.indexOf("popularity");
+            indexFirstAdult = actorResponse.indexOf("adult");
+            indexFirstProfilePath = actorResponse.indexOf("profile_path");
+
             if ((indexFirstCountry > -1) && (indexLastCountry > -1)) {
-                actor.setPlaceOfBirth(actorResponse.substring(indexFirstCountry + 17, indexLastCountry - 3));
+                String pob = actorResponse.substring(indexFirstCountry + 17, indexLastCountry - 3).split(",")[0];
+                if (!pob.equals("ul")) {
+                    actor.setPlaceOfBirth(pob);
+                } else {
+                    actor.setPlaceOfBirth("");
+                }
+            }
+
+            if ((indexFirstPopularity > -1) && (indexFirstCountry > -1)) {
+                float popularity = Float.parseFloat(actorResponse.substring(indexFirstPopularity + 12, indexFirstCountry - 2));
+                actor.setPopularity(popularity);
+            }
+
+            if ((indexFirstAdult > -1) && (indexFirstProfilePath > -1)) {
+                actor.setImageUrl(actorResponse.substring(indexFirstProfilePath + 16, indexFirstAdult - 3));
             }
         } catch (Exception ex) {
-            System.out.println(ex.toString() + "@actor" + "Actor Name: " + actor.Name + " IndexLast: " + indexLastCountry);
         }
         return actor;
     }

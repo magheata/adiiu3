@@ -13,7 +13,6 @@
         <title>JSP Page</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="jquery-3.3.1.min.js" type="text/javascript"></script>
-        <script src="primera.js" type="text/javascript"></script>
         <style>
             * {box-sizing: border-box;}
 
@@ -79,6 +78,7 @@
             <div class="header-right">
                 <a class="active" href="<%= request.getContextPath() %>">Home</a>
                 <a href="<%= request.getContextPath() %>/login.jsp">Login</a>
+                <a href="<%= request.getContextPath() %>/partPrivada.jsp">Catálogo películas</a>
                 <a href="javascript:getMovieInformation();">About</a>
             </div>
         </div>

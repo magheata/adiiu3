@@ -11,9 +11,17 @@ package datamodels;
  */
 public class Actor {
     public String Name;
-    public String Gender;
     public String PlaceOfBirth;
     public float Popularity;
+    public String ImageUrl;
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String ImageUrl) {
+        this.ImageUrl = ImageUrl;
+    }
 
     public String getName() {
         return Name;
@@ -21,14 +29,6 @@ public class Actor {
 
     public void setName(String Name) {
         this.Name = Name;
-    }
-
-    public String getGender() {
-        return Gender;
-    }
-
-    public void setGender(String Gender) {
-        this.Gender = Gender;
     }
 
     public String getPlaceOfBirth() {
@@ -49,12 +49,12 @@ public class Actor {
     
     @Override
     public String toString() {
-        String actor = "{'actor':[ ";
-        actor = actor + "'name':" + "'" + this.Name + "',";
-        actor = actor + "'gender':" + this.Gender + "',";
-        actor = actor + "'placeOfBirth':" + this.PlaceOfBirth + "',";
-        actor = actor + "'popularity':" + this.Popularity + "'";
-        actor = actor + "]}";
+        String actor = "{\"actor\":{ ";
+        actor = actor + "\"name\":" + "\"" + this.Name + "\",";
+        actor = actor + "\"placeOfBirth\": \"" + this.PlaceOfBirth + "\",";
+        actor = actor + "\"popularity\": \"" + this.Popularity + "\"";
+        actor = actor + "\"imageUrl\": \"" + this.ImageUrl + "\"";
+        actor = actor + "}}";
         return actor;
     }
 }

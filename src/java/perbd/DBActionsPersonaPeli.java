@@ -108,7 +108,7 @@ public class DBActionsPersonaPeli {
             st1 = con.getConection().createStatement();
             st2 = con.getConection().createStatement();
             st3 = con.getConection().createStatement();
-            String sqlq = "select * from peliculas where originaltitle like '" + par + "';";
+            String sqlq = "select * from peliculas where originaltitle like '" + par + "' limit 1;";
             ResultSet rs = st1.executeQuery(sqlq);
             String aux;
             String codnom;
