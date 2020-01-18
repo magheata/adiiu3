@@ -54,6 +54,7 @@
         <div id="espera">
         </div>
         <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <div id="containerBarras" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
     </body>
 
     <!-- Bootstrap core JavaScript -->
