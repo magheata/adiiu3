@@ -10,3 +10,18 @@ body {
 .peliCat{
     margin: 5px;
 }
+
+.modal-login .modal-content {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border-color: #000;
+    border-width: 2px;
+    background: #deeaee;
+    color:#000;    
+}
+
+.modal-login .modal-content .modal-header {
+    text-align:center;
+    border: none;
+}
