@@ -59,7 +59,7 @@ public class Movie {
         movie = movie + "\"country\":\"" + this.CountryOfOrigin + "\",";
         movie = movie + "\"actors\":[";
         for (int i = 0; i < this.Actors.size(); i++) {
-            movie = movie + this.Actors.get(i).toString() + ",";
+            movie = movie + this.Actors.get(i).toString() + "$";
         }
         movie = movie.substring(0, movie.length() - 1);   // quito la última coma
         movie = movie + "] }}";

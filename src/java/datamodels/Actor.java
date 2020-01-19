@@ -50,9 +50,9 @@ public class Actor {
     @Override
     public String toString() {
         String actor = "{\"actor\":{ ";
-        actor = actor + "\"name\":" + "\"" + this.Name + "\",";
-        actor = actor + "\"placeOfBirth\": \"" + this.PlaceOfBirth + "\",";
-        actor = actor + "\"popularity\": \"" + this.Popularity + "\"";
+        actor = actor + "\"name\":" + "\"" + this.Name + "\";";
+        actor = actor + "\"placeOfBirth\": \"" + this.PlaceOfBirth + "\";";
+        actor = actor + "\"popularity\": \"" + this.Popularity + "\";";
         actor = actor + "\"imageUrl\": \"" + this.ImageUrl + "\"";
         actor = actor + "}}";
         return actor;
