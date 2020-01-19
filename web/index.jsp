@@ -32,7 +32,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" id="navbarMenu">
                         <li class="nav-item active">
                             <a class="nav-link" href="index.jsp">Home
                                 <span class="sr-only">(current)</span>
@@ -40,9 +40,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="partPrivada.jsp">Catálogo de películas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#LoginModal" data-toggle="modal">Log In</a>
                         </li>
                     </ul>
                 </div>

@@ -23,6 +23,13 @@ $(document).ready(function () {
     pintarEspera();
     loadCacheElements();
     
+    //Logged
+    if(sessionStorage.getItem("hasAccess") === "true"){
+        $("#navbarMenu").append('<li class="nav-item"><a class="nav-link" href="" id="btnLogout">Log Out</a></li>');
+    }else{
+        $("#navbarMenu").append('<li class="nav-item"><a class="nav-link" href="#LoginModal" data-toggle="modal">Log In</a></li>');
+    }
+    
     //Login
     $("#btnLogin").click(function(event) {
       $("#loginError").removeClass("alert alert-danger");
@@ -41,6 +48,9 @@ $(document).ready(function () {
         sessionStorage.setItem("hasAccess", true);
         form.addClass('was-validated');
       }
+    });
+    $("#btnLogout").click(function(event) {
+        sessionStorage.setItem("hasAccess", false);
     });
 });
 
