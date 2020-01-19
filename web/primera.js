@@ -5,6 +5,9 @@ var acumPelisString;
 var p1;
 var p2;
 var p3;
+var pelisTipo1Done;
+var pelisTipo2Done;
+var pelisTipo3Done;
 
 var acumPP;
 var ppactores;
@@ -14,6 +17,10 @@ $(document).ready(function () {
     acumCantidad = 0;
     acumPelisString = 0;
     acumPP = 0;
+    pelisTipo1Done = 0;
+    pelisTipo2Done = 0;
+    pelisTipo3Done = 0;
+
     pintarEspera();
     loadCacheElements();
     
@@ -72,7 +79,8 @@ function getMoviesRatingUnder5() {
             success: function (result) {
                 sessionStorage.setItem("peliculasTipo1", result);
             }});
-    }
+    } 
+    pelisTipo1Done = 1;
 }
 
 function getMoviesRatingBetween5And7Count() {
@@ -118,7 +126,6 @@ function getMoviesRatingOver7Count() {
     pintarGrafica2();
 }
 
-
 function getMoviesRatingOver7() {
     result = sessionStorage.getItem("peliculasTipo3");
     if (result === null) {
@@ -136,15 +143,30 @@ function getMovieInformationType1() {
     } else {
         element.classList.add("active");
         getMoviesRatingUnder5();
-        result = sessionStorage.getItem("peliculasInfoTipo1");
-        if (result === null) {
+        while(pelisTipo1Done !== 1){
+            
+        }
+        if (sessionStorage.getItem("peliculasInfoTipo1") === null) {
             peliculasTipo1 = sessionStorage.getItem("peliculasTipo1");
             $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo1,
                 success: function (result) {
                     sessionStorage.setItem("peliculasInfoTipo1", result);
                     acumPelisString++;
                     pintarGrafica2();
+                    pelisTipo2Done = 2;
                 }});
+        }
+        
+        result = sessionStorage.getItem("peliculasInfoTipo1");
+
+        var peliculas = result.split("%");
+
+        for (i = 0; i < peliculas.length; i++) {
+            var peliculaActual = peliculas[i].split(",");
+            var nombrePelicula = peliculaActual[0];
+            var fechaEstreno = peliculaActual[1];
+            var paisCreacion = peliculaActual[2];
+            var actoresPelicula = peliculaActual[3];
         }
     }
 }
