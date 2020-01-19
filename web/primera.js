@@ -20,7 +20,6 @@ $(document).ready(function () {
     pelisTipo1Done = 0;
     pelisTipo2Done = 0;
     pelisTipo3Done = 0;
-
     pintarEspera();
     loadCacheElements();
     
