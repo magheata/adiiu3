@@ -47,7 +47,7 @@ public class MovieService {
                 movie = SetMovieParameters(movie, movieS);
                 if (movie != null) {
                     movie.setActors(GetActorsForMovieInfo(movie.Name));
-                    movies = movies + movie.toString() + ", ";
+                    movies = movies + movie.toString() + "%";
                 }
             }
         }
