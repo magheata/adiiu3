@@ -9,6 +9,10 @@ var pelisTipo1Done;
 var pelisTipo2Done;
 var pelisTipo3Done;
 
+var acumPP;
+var ppactores;
+var pppelis;
+
 $(document).ready(function () {
     acumCantidad = 0;
     acumPelisString = 0;
@@ -28,6 +32,7 @@ function loadCacheElements() {
     getMoviesRatingUnder5Count();
     getMoviesRatingBetween5And7Count();
     getMoviesRatingOver7Count();
+    getMoviesAndActors();
 }
 
 function getMoviesRatingUnder5Count() {
@@ -185,6 +190,57 @@ function getMovieInformationType3() {
     }
 }
 
+function getMoviesAndActors() {
+    result1 = sessionStorage.getItem("actoresPrincipales");
+    result2 = sessionStorage.getItem("cantidadPeliculasActores");
+    if (result1 === null) {
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=personas",
+            success: function (result1) {
+                sessionStorage.setItem("actoresPrincipales", result1);
+                //String to array
+                result1 = result1.replace('["',"");
+                result1 = result1.replace('"]',"");
+                result1 = result1.replace('\r\n',"");
+                result1 = result1.split('", "');
+                ppactores = result1;
+                acumPP++;
+            }});
+    } else {
+        //String to array
+        result1 = result1.replace('["',"");
+        result1 = result1.replace('"]',"");
+        result1 = result1.replace('\r\n',"");
+        result1 = result1.split('", "');
+        ppactores = result1;
+        acumPP++;
+    }
+    if (result2 === null) {
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=pelis",
+            success: function (result2) {
+                sessionStorage.setItem("cantidadPeliculasActores", result2);
+                //String to array
+                result2 = result2.replace('[',"");
+                result2 = result2.replace(']',"");
+                result2 = result2.replace('\r\n',"");
+                result2 = result2.split(', ').map(function(item) {
+                    return parseInt(item, 10);
+                });;
+                pppelis = result2;
+                acumPP++;
+            }});
+    } else {
+        result2 = result2.replace('[',"");
+        result2 = result2.replace(']',"");
+        result2 = result2.replace('\r\n',"");
+        result2 = result2.split(', ').map(function(item) {
+            return parseInt(item, 10);
+        });;
+        pppelis = result2;
+        acumPP++;
+    }
+    pintarGrafica2();
+}
+
 function pintarGrafica2() {
     if ((acumCantidad === 3)) {
         $('#espera').empty();
@@ -216,6 +272,9 @@ function pie() {
                 }
             }
         },
+        credits: {
+            enabled: false
+        },
         series: [{
                 name: 'Edades',
                 colorByPoint: true,
@@ -233,4 +292,52 @@ function pie() {
                     }]
             }]
     });
+    Highcharts.chart('containerBarras', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Películas por persona'
+        },
+        xAxis: {
+            categories: ppactores
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Películas'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            type: 'column',
+            colorByPoint: true,
+            name: 'Películas',
+            data: pppelis,
+            showInLegend: false
+        }]
+    });
 }
+
+$("#btnLogin").click(function(event) {
+
+  //Fetch form to apply custom Bootstrap validation
+  var form = $("#formLogin")
+
+  if (form[0].checkValidity() === false) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
+  form.addClass('was-validated');
+});

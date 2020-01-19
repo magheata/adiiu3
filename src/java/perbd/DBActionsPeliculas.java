@@ -7,6 +7,8 @@ package perbd;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -53,6 +55,42 @@ public class DBActionsPeliculas {
                canti = rs.getInt(1);
             }
             res = res + canti + "}";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            con.close();
+        }
+        return res;
+    }
+    
+    public List<String> getPelisPorActor(String par) {
+        DBConnection con = new DBConnection();
+        List<String> res = new ArrayList<>();
+        try {
+            con.open();
+            Statement st = con.getConection().createStatement();
+            String sqlq = "select * from namebasics limit 4;";
+            ResultSet rs = st.executeQuery(sqlq);
+            String aux;
+            String persona;
+            String nconst;
+            String pelis;
+            while (rs.next()) {
+                persona = rs.getString("primaryname");
+                if(par.equals("personas")){
+                    res.add('"' + persona + '"');
+                }else if(par.equals("pelis")){
+                    nconst = rs.getString("nconst"); //id de la persona
+                    Statement st2 = con.getConection().createStatement();
+                    String sqlq2 = "select count(tconst) as contador from personapeli where nconst='" + nconst + "';";
+                    ResultSet rs2 = st2.executeQuery(sqlq2);
+                    if (rs2.next()) {
+                        res.add(rs2.getString("contador"));
+                    }else{
+                        res.add(Integer.toString(0));
+                    }
+                }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

@@ -42,7 +42,7 @@
                             <a class="nav-link" href="partPrivada.jsp">Catálogo de películas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Log In</a>
+                            <a class="nav-link" href="#LoginModal" data-toggle="modal">Log In</a>
                         </li>
                     </ul>
                 </div>
@@ -54,6 +54,33 @@
         <div id="espera">
         </div>
         <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <div id="containerBarras" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Log In</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="pass" required="" placeholder="Contraseña">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
+
+                            <div class="form-group text-center py-4">
+                                <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 
     <!-- Bootstrap core JavaScript -->
