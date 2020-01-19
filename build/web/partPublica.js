@@ -16,26 +16,6 @@ $(document).ready(function () {
     acumPP = 0;
     pintarEspera();
     loadCacheElements();
-    
-    //Login
-    $("#btnLogin").click(function(event) {
-      $("#loginError").removeClass("alert alert-danger");
-      $('#loginError').empty();
-      //Fetch form to apply custom Bootstrap validation
-      var form = $("#formLogin");
-      if (form[0].checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }else if($('input[name="user"]').val() !== "user"){
-        $("#loginError").addClass("alert alert-danger");
-        $('#loginError').append('<b>Error:</b> Usuario/contraseña incorrectos');
-        event.preventDefault();
-        event.stopPropagation();
-      }else{
-        sessionStorage.setItem("hasAccess", true);
-        form.addClass('was-validated');
-      }
-    });
 });
 
 

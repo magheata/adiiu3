@@ -5,6 +5,11 @@ var pelisTipo3Done;
 $(document).ready(function () {
     pelisTipo2Done = 0;
     pelisTipo3Done = 0;
+    
+    if(sessionStorage.getItem("hasAccess") !== "true"){
+        $("#pageContent").empty();
+        $("#pageContent").append('<div class="card" style="margin: 30px"><div class="card-body">Debes loguearte para acceder a esta página</div></div>');
+    }
 });
 
 function getMoviesRatingUnder5() {

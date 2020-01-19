@@ -21,13 +21,14 @@
         <script src="exporting.js"></script>
         <script src="export-data.js"></script>
         <script src="partPublica.js" type="text/javascript"></script>
+        <script src="login.js" type="text/javascript"></script>
     </head>
 
     <body>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">PelisWeb</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -50,8 +51,9 @@
         </H1>
         <div id="espera">
         </div>
-        <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-        <div id="containerBarras" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <div id="container" class="col-md-6" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <div id="containerBarras" class="col-md-6" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <!--Login modal-->
         <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -67,7 +69,7 @@
                                 <div class="invalid-feedback">Debes rellenar este campo.</div>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="pass" required="" placeholder="Contraseña">
+                                <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
                                 <div class="invalid-feedback">Debes rellenar este campo.</div>
                             </div>
 
@@ -79,6 +81,13 @@
                 </div>
             </div>
         </div>
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; PelisWeb (Andreea & Pablo) 2020</p>
+            </div>
+            <!-- /.container -->
+        </footer>
     </body>
 
     <!-- Bootstrap core JavaScript -->
