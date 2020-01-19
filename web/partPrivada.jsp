@@ -14,14 +14,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Shop Homepage - Start Bootstrap Template</title>
+        <title>Portal de películas</title>
 
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="css/shop-homepage.css" rel="stylesheet">
+        <script src="jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="partPrivada.js" type="text/javascript"></script>
+        <script src="login.js" type="text/javascript"></script>
 
     </head>
 
@@ -30,12 +32,12 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">PelisWeb</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" id="navbarMenu">
                         <li class="nav-item">
                             <a class="nav-link" href="index.jsp">Home
                             </a>
@@ -44,16 +46,13 @@
                             <a class="nav-link" href="partPrivada.jsp">Catálogo de películas</a>
                             <span class="sr-only">(current)</span>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.jsp">Log Out</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
         <!-- Page Content -->
-        <div class="container">
+        <div class="container" id="pageContent">
 
             <div class="row">
 
@@ -83,14 +82,39 @@
 
             </div>
             <!-- /.row -->
-
         </div>
         <!-- /.container -->
+        <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Log In</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="loginError"></div>
+                        <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
 
+                            <div class="form-group text-center py-4">
+                                <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Footer -->
         <footer class="py-5 bg-dark">
             <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+                <p class="m-0 text-center text-white">Copyright &copy; PelisWeb (Andreea & Pablo) 2020</p>
             </div>
             <!-- /.container -->
         </footer>

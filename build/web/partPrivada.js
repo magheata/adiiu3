@@ -2,6 +2,13 @@ var pelisTipo1Done;
 var pelisTipo2Done;
 var pelisTipo3Done;
 
+$(document).ready(function () {
+    if(sessionStorage.getItem("hasAccess") !== "true"){
+        $("#pageContent").empty();
+        $("#pageContent").append('<div class="card" style="margin: 30px"><div class="card-body">Debes loguearte para acceder a esta página</div></div>');
+    }
+});
+
 function getMoviesRatingUnder5() {
     result = sessionStorage.getItem("peliculasTipo1");
     if (result === null) {
