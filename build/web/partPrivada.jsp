@@ -21,7 +21,7 @@
 
         <!-- Custom styles for this template -->
         <link href="css/shop-homepage.css" rel="stylesheet">
-        <script src="primera.js" type="text/javascript"></script>
+        <script src="partPrivada.js" type="text/javascript"></script>
 
     </head>
 

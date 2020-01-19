@@ -20,7 +20,7 @@
         <script src="highcharts.js"></script>
         <script src="exporting.js"></script>
         <script src="export-data.js"></script>
-        <script src="primera.js" type="text/javascript"></script>
+        <script src="partPublica.js" type="text/javascript"></script>
     </head>
 
     <body>
