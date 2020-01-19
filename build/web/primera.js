@@ -13,8 +13,29 @@ var pppelis;
 $(document).ready(function () {
     acumCantidad = 0;
     acumPelisString = 0;
+    acumPP = 0;
     pintarEspera();
     loadCacheElements();
+    
+    //Login
+    $("#btnLogin").click(function(event) {
+      $("#loginError").removeClass("alert alert-danger");
+      $('#loginError').empty();
+      //Fetch form to apply custom Bootstrap validation
+      var form = $("#formLogin");
+      if (form[0].checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      }else if($('input[name="user"]').val() !== "user"){
+        $("#loginError").addClass("alert alert-danger");
+        $('#loginError').append('<b>Error:</b> Usuario/contraseña incorrectos');
+        event.preventDefault();
+        event.stopPropagation();
+      }else{
+        sessionStorage.setItem("hasAccess", true);
+        form.addClass('was-validated');
+      }
+    });
 });
 
 function pintarEspera() {
@@ -31,7 +52,7 @@ function loadCacheElements() {
 function getMoviesRatingUnder5Count() {
     result = sessionStorage.getItem("cantidadPeliculas1");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=0-5",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=0-5",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas1", result);
                 p1 = parseInt(result);
@@ -47,7 +68,7 @@ function getMoviesRatingUnder5Count() {
 function getMoviesRatingUnder5() {
     result = sessionStorage.getItem("peliculasTipo1");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=0-5",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=0-5",
             success: function (result) {
                 sessionStorage.setItem("peliculasTipo1", result);
             }});
@@ -57,7 +78,7 @@ function getMoviesRatingUnder5() {
 function getMoviesRatingBetween5And7Count() {
     result = sessionStorage.getItem("cantidadPeliculas2");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=6-8",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=6-8",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas2", result);
                 p2 = parseInt(result);
@@ -74,7 +95,7 @@ function getMoviesRatingBetween5And7Count() {
 function getMoviesRatingBetween5And7() {
     result = sessionStorage.getItem("peliculasTipo2");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=6-8",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=6-8",
             success: function (result) {
                 sessionStorage.setItem("peliculasTipo2", result);
             }});
@@ -84,7 +105,7 @@ function getMoviesRatingBetween5And7() {
 function getMoviesRatingOver7Count() {
     result = sessionStorage.getItem("cantidadPeliculas3");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=9-10",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=9-10",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas3", result);
                 p3 = parseInt(result);
@@ -101,7 +122,7 @@ function getMoviesRatingOver7Count() {
 function getMoviesRatingOver7() {
     result = sessionStorage.getItem("peliculasTipo3");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=9-10",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingstring&par=9-10",
             success: function (result) {
                 sessionStorage.setItem("peliculasTipo3", result);
             }});
@@ -118,7 +139,7 @@ function getMovieInformationType1() {
         result = sessionStorage.getItem("peliculasInfoTipo1");
         if (result === null) {
             peliculasTipo1 = sessionStorage.getItem("peliculasTipo1");
-            $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo1,
+            $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo1,
                 success: function (result) {
                     sessionStorage.setItem("peliculasInfoTipo1", result);
                     acumPelisString++;
@@ -138,7 +159,7 @@ function getMovieInformationType2() {
         result = sessionStorage.getItem("peliculasInfoTipo2");
         if (result === null) {
             peliculasTipo2 = sessionStorage.getItem("peliculasTipo2");
-            $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo2,
+            $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo2,
                 success: function (result) {
                     sessionStorage.setItem("peliculasInfoTipo2", result);
                     acumPelisString++;
@@ -158,7 +179,7 @@ function getMovieInformationType3() {
         result = sessionStorage.getItem("peliculasInfoTipo3");
         if (result === null) {
             peliculasTipo3 = sessionStorage.getItem("peliculasTipo3");
-            $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo3,
+            $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo3,
                 success: function (result) {
                     sessionStorage.setItem("peliculasInfoTipo3", result);
                     acumPelisString++;
@@ -306,16 +327,3 @@ function pie() {
         }]
     });
 }
-
-$("#btnLogin").click(function(event) {
-
-  //Fetch form to apply custom Bootstrap validation
-  var form = $("#formLogin")
-
-  if (form[0].checkValidity() === false) {
-    event.preventDefault()
-    event.stopPropagation()
-  }
-
-  form.addClass('was-validated');
-});

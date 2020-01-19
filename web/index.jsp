@@ -63,6 +63,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
                     <div class="modal-body">
+                        <div id="loginError"></div>
                         <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
