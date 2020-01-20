@@ -60,7 +60,8 @@
             <div class ="row">
 
                 <div class ="col-lg-4" id ="chartsRegion">
-                    Pruebas
+                    <div id ="chart"></div>
+                    <div id = "map"></div>
                 </div>
                 <div class="row col-lg-8">
                     <h1 id="partPrivadaTitle">Peliculas por categoría</h1>
