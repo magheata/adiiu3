@@ -149,8 +149,9 @@ function getMoviesRatingOver7() {
 
 function getMovieInfoFromAPI(peliculasTipoS, peliculasTipoInfo, typeMovie, pelisTipoDone, listaPaisesNombre, paisesMapaTipo) {
     peliculasTipo = sessionStorage.getItem(peliculasTipoInfo);
-    if (sessionStorage.getItem(peliculasTipoInfo) === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipo,
+    if (peliculasTipo === null) {
+        var peliculasTipoX = sessionStorage.getItem(peliculasTipoS);
+        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=getMoviesInfo&par=" + peliculasTipoX,
             success: function (result) {
                 sessionStorage.setItem(peliculasTipoInfo, result);
                 pelisTipoDone = pelisTipoDone + 1;
@@ -206,7 +207,6 @@ function parseAPIResponse(peliculasTipoInfo, typeMovie, listaPaisesNombre) {
 
         var movieString = "<div class=\"col-lg-4 col-md-6 mb-4 " + typeMovie + "\">" +
                 "<div class=\"card h-100\">" +
-                "<a href=\"#\"><img class=\"card-img-top\" src=\"http://placehold.it/700x400\" alt=\"\"></a>" +
                 "<div class=\"card-body\">" +
                 "<h4 class=\"card-title\">" +
                 "<a href=\"#\">" + nombrePelicula + "</a>" +
