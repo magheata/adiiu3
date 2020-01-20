@@ -122,14 +122,7 @@
                         </div>
 
                         <div id="tags">
-                            <ul>
-                                <li><a href="http://www.google.com" target="_blank">Google</a></li>
-                                <li><a href="http://www.uib.es">primer UIB</a></li>
-                                <li><a href="http://www.uib.es">segon UIB</a></li>
-                                <li><a href="http://www.uib.es">tercer UIB</a></li>
-                                <li><a href="http://www.uib.es">quart UIB</a></li>
-                                <li><a href="index.jsp?persona=González">paràmetre1</a></li>
-                                <li><a href="index.jsp?persona=Fernández">paràmetre2</a></li>
+                            <ul id="containerTags">
                             </ul>
                         </div>
                     </div>

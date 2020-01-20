@@ -180,6 +180,7 @@ function parseAPIResponse(peliculasTipoInfo, typeMovie, listaPaisesNombre) {
     result = sessionStorage.getItem(peliculasTipoInfo);
     var peliculas = result.split("%");
     var movieStringList = "";
+    var maxNubeActores = 15;
     for (var i = 0; i < peliculas.length - 1; i++) {
         var peliculaActual = peliculas[i].split(",");
         var nombrePelicula = peliculaActual[0].substring(peliculaActual[0].indexOf("movieName") + 12, peliculaActual[0].length - 1);
@@ -201,11 +202,25 @@ function parseAPIResponse(peliculasTipoInfo, typeMovie, listaPaisesNombre) {
         }
 
         var actoresPelicula = peliculaActual[3].split("$");
-        for (j = 0; j < actoresPelicula.length; j++){
+        for (j = 0; j < actoresPelicula.length && maxNubeActores > 0; j++){
             var actorActual = actoresPelicula[j].split(";");
-            var nombreActor = actorActual[0].substring(actorActual[0].indexOf("name") + 7, actorActual[0].length - 1);
-            var paisNacimientoActor = actorActual[1].substring(actorActual[1].indexOf("name") + 7, actorActual[1].length - 1);
+                var nombreActor = actorActual[0].substring(actorActual[0].indexOf("name") + 7, actorActual[0].length - 1);
+                if(nombreActor!=='s":] }'){
+                    $("#containerTags").append('<li><a href="?persona=' + nombreActor + '">' + nombreActor + '</a></li>');
+                }
+                maxNubeActores--;
+                
         }
+        if(!$('#myCanvas').tagcanvas({
+            textColour: '#ff0000',
+            outlineThickness: 1,
+            outlineColour: '#000000',
+            maxSpeed: 0.03,
+            depth: 0.75
+        }, 'tags')) {
+            $('#myCanvasContainer').hide();
+        }
+        $("#param").html(getParPerNom("persona"));
         
         var movieString = "<div class=\"col-lg-4 col-md-6 mb-4 " + typeMovie + "\">" +
                 "<div class=\"card h-100\">" +
