@@ -8,12 +8,19 @@ var p3;
 
 var acumPP;
 var ppactores;
+var actoresFallecidos;
+var actoresVivos;
+var menoresDe30;
+var entre30y60;
+var mayoresDe60;
 var pppelis;
 
 $(document).ready(function () {
     acumCantidad = 0;
     acumPelisString = 0;
     acumPP = 0;
+    actoresFallecidos = 0;
+    actoresVivos = 0;
     pintarEspera();
     loadCacheElements();
 });
@@ -87,27 +94,53 @@ function pintarGrafica2() {
 }
 
 function getMoviesAndActors() {
+    mayoresDe60 = 0;
+    entre30y60 = 0;
+    menoresDe30 = 0;
     result1 = sessionStorage.getItem("actoresPrincipales");
     result2 = sessionStorage.getItem("cantidadPeliculasActores");
+    ppactores = [];
     if (result1 === null) {
         $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=personas",
             success: function (result1) {
                 sessionStorage.setItem("actoresPrincipales", result1);
                 //String to array
-                result1 = result1.replace('["',"");
-                result1 = result1.replace('"]',"");
-                result1 = result1.replace('\r\n',"");
-                result1 = result1.split('", "');
-                ppactores = result1;
+                result1 = result1.split(",");
+                for (var i = 0; i < result1.length; i++) {
+                    var infoActor = result1[i].split(";");
+                    var nombreActor = infoActor[0].substring(infoActor[0].indexOf("name") + 8, infoActor[0].length - 2);
+                    var fechaNacimiento = parseInt(infoActor[3].substring(infoActor[3].indexOf("dateOfBirth") + 15, infoActor[3].length - 2));
+                    var fechaMuerte = parseInt(infoActor[4].substring(infoActor[4].indexOf("dateOfDecease") + 17, infoActor[4].length - 2));
+                    var edad = fechaMuerte - fechaNacimiento;
+                    if (edad < 30) {
+                        menoresDe30++;
+                    } else if ((30 <= edad) && (edad < 50)) {
+                        entre30y60++;
+                    } else {
+                        mayoresDe60++;
+                    }
+                    ppactores.push(nombreActor);
+                }
                 acumPP++;
             }});
     } else {
         //String to array
-        result1 = result1.replace('["',"");
-        result1 = result1.replace('"]',"");
-        result1 = result1.replace('\r\n',"");
-        result1 = result1.split('", "');
-        ppactores = result1;
+        result1 = result1.split(",");
+        for (var i = 0; i < result1.length; i++) {
+            var infoActor = result1[i].split(";");
+            var nombreActor = infoActor[0].substring(infoActor[0].indexOf("name") + 8, infoActor[0].length - 2);
+            var fechaNacimiento = parseInt(infoActor[3].substring(infoActor[3].indexOf("dateOfBirth") + 15, infoActor[3].length - 2));
+            var fechaMuerte = parseInt(infoActor[4].substring(infoActor[4].indexOf("dateOfDecease") + 17, infoActor[4].length - 2));
+            var edad = fechaMuerte - fechaNacimiento;
+            if (edad < 30) {
+                menoresDe30++;
+                    } else if ((30 <= edad) && (edad < 50)) {
+                entre30y60++;
+            } else {
+                mayoresDe60++;
+            }
+            ppactores.push(nombreActor);
+        }
         acumPP++;
     }
     if (result2 === null) {
@@ -115,22 +148,24 @@ function getMoviesAndActors() {
             success: function (result2) {
                 sessionStorage.setItem("cantidadPeliculasActores", result2);
                 //String to array
-                result2 = result2.replace('[',"");
-                result2 = result2.replace(']',"");
-                result2 = result2.replace('\r\n',"");
-                result2 = result2.split(', ').map(function(item) {
+                result2 = result2.replace('[', "");
+                result2 = result2.replace(']', "");
+                result2 = result2.replace('\r\n', "");
+                result2 = result2.split(', ').map(function (item) {
                     return parseInt(item, 10);
-                });;
+                });
+                ;
                 pppelis = result2;
                 acumPP++;
             }});
     } else {
-        result2 = result2.replace('[',"");
-        result2 = result2.replace(']',"");
-        result2 = result2.replace('\r\n',"");
-        result2 = result2.split(', ').map(function(item) {
+        result2 = result2.replace('[', "");
+        result2 = result2.replace(']', "");
+        result2 = result2.replace('\r\n', "");
+        result2 = result2.split(', ').map(function (item) {
             return parseInt(item, 10);
-        });;
+        });
+        ;
         pppelis = result2;
         acumPP++;
     }
@@ -168,19 +203,20 @@ function pie() {
                 name: 'Edades',
                 colorByPoint: true,
                 data: [{
-                        name: '< 5',
-                        y: p1,
+                        name: '< 20',
+                        y: menoresDe30,
                         sliced: true,
                         selected: true
                     }, {
-                        name: 'entre 6 y 8',
-                        y: p2
+                        name: 'entre 20 y 45',
+                        y: entre30y60
                     }, {
-                        name: '> 8',
-                        y: p3
+                        name: '> 45',
+                        y: mayoresDe60
                     }]
             }]
     });
+
     Highcharts.chart('containerBarras', {
         chart: {
             type: 'bar'

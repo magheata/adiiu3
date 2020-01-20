@@ -69,16 +69,20 @@ public class DBActionsPeliculas {
         try {
             con.open();
             Statement st = con.getConection().createStatement();
-            String sqlq = "select * from namebasics limit 4;";
+            String sqlq = "select * from namebasics limit 10;";
             ResultSet rs = st.executeQuery(sqlq);
             String aux;
             String persona;
+            String birthYear;
+            String deathYear;
             String nconst;
             String pelis;
             while (rs.next()) {
                 persona = rs.getString("primaryname");
+                birthYear = rs.getString("birthyear");
+                deathYear = rs.getString("deathYear");
                 if(par.equals("personas")){
-                    res.add('"' + persona + '"');
+                    res.add('"' + persona + '"' + ", " + birthYear + ", " + deathYear);
                 }else if(par.equals("pelis")){
                     nconst = rs.getString("nconst"); //id de la persona
                     Statement st2 = con.getConection().createStatement();

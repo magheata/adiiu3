@@ -70,6 +70,15 @@ public class MovieService {
         }
         return actors;
     }
+    
+    public Actor GetActorInformation(Actor actor, String name){
+        String id = movieDBRepository.SearchActorId(actor);
+            if (!id.equals("")) {
+                String actorS = movieDBRepository.Get("person", id);
+                SetActorParameters(actor, actorS);
+            }
+        return actor;
+    }
 
     private Movie SetMovieParameters(Movie movie, String movieResponse) {
 

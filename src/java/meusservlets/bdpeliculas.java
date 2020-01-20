@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import perbd.ActorService;
 import perbd.DBActionsNameBasics;
 import perbd.DBActionsPeliculas;
 import perbd.DBActionsPersonaPeli;
@@ -106,8 +107,8 @@ public class bdpeliculas extends HttpServlet {
             DBActionsPeliculas dbap = new DBActionsPeliculas();
             res = dbap.getCantidPorCadena(par);
         } else if (operacion.contentEquals("pelisporactor")) {
-            DBActionsPeliculas dbap = new DBActionsPeliculas();
-            res = dbap.getPelisPorActor(par).toString();
+            ActorService actorService = new ActorService();
+            res = actorService.GetActors(par);
         } else if (operacion.contentEquals("pelisdepersona")) {
             DBActionsPersonaPeli dbapp = new DBActionsPersonaPeli();
             res = dbapp.getPelisDePersona(par);
