@@ -32,7 +32,7 @@
         <script type="text/javascript">
             $(document).ready(function () {
                 if (!$('#myCanvas').tagcanvas({
-                    textColour: '#ff0000',
+                    textColour: '#b44010',
                     outlineThickness: 1,
                     outlineColour: '#000000',
                     maxSpeed: 0.03,
@@ -137,30 +137,31 @@
             <h1><br></h1>
             
             <!-- /.container -->
-            <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3>Log In</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="loginError"></div>
-                            <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
-                                    <div class="invalid-feedback">Debes rellenar este campo.</div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
-                                    <div class="invalid-feedback">Debes rellenar este campo.</div>
-                                </div>
+        </div>
+        <!--Login Modal-->
+        <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Log In</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="loginError"></div>
+                        <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
 
-                                <div class="form-group text-center py-4">
-                                    <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="form-group text-center py-4">
+                                <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

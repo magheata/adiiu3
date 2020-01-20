@@ -16,23 +16,24 @@ $(document).ready(function () {
     if (sessionStorage.getItem("hasAccess") !== "true") {
         $("#pageContent").empty();
         $("#pageContent").append('<div class="card" style="margin: 30px"><div class="card-body">Debes loguearte para acceder a esta página</div></div>');
-    }
-    sessionStorage.setItem("tipo1Selected", false);
-    sessionStorage.setItem("tipo2Selected", false);
-    sessionStorage.setItem("tipo3Selected", false);
+    }else{
+        sessionStorage.setItem("tipo1Selected", false);
+        sessionStorage.setItem("tipo2Selected", false);
+        sessionStorage.setItem("tipo3Selected", false);
 
-    var data = [
-        ['eu', 0],
-        ['oc', 0],
-        ['af', 0],
-        ['as', 0],
-        ['na', 0],
-        ['sa', 0]
-    ];
-    chart();
-    paintMap("", 0);
-    sessionStorage.setItem("dataMap", data);
-    loadActorsCloud();
+        var data = [
+            ['eu', 0],
+            ['oc', 0],
+            ['af', 0],
+            ['as', 0],
+            ['na', 0],
+            ['sa', 0]
+        ];
+        chart();
+        paintMap("", 0);
+        sessionStorage.setItem("dataMap", data);
+        loadActorsCloud();
+    }
 });
 
 function getMovieInformationType1() {
