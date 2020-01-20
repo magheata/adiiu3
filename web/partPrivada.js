@@ -9,6 +9,7 @@ var tipo1DeleteMap = false;
 var tipo2DeleteMap = false;
 var tipo3DeleteMap = false;
 
+var datosActores = [];
 
 $(document).ready(function () {
     pelisEspera = 0;
@@ -31,6 +32,7 @@ $(document).ready(function () {
     chart();
     paintMap("", 0);
     sessionStorage.setItem("dataMap", data);
+    loadActorsCloud();
 });
 
 function getMovieInformationType1() {
@@ -201,6 +203,7 @@ function parseAPIResponse(peliculasTipoInfo, typeMovie, listaPaisesNombre) {
                 listaPaisesStorage.push(newPais);
             }
         } 
+
         var movieString = "<div class=\"col-lg-4 col-md-6 mb-4 " + typeMovie + "\">" +
                 "<div class=\"card h-100\">" +
                 "<a href=\"#\"><img class=\"card-img-top\" src=\"http://placehold.it/700x400\" alt=\"\"></a>" +
@@ -577,3 +580,97 @@ function addToMap(listaPaisesTipo, paisesMapaTipo) {
     }
     paintMap(newData, max);
 }
+
+function loadActorsCloud(){
+    var result1 = sessionStorage.getItem("actoresPrincipales").split(",");
+    for (var i = 0; i < result1.length; i++) {
+        var infoActor = result1[i].split(";");
+        var nombreActor = infoActor[0].substring(infoActor[0].indexOf("name") + 8, infoActor[0].length - 2);
+        $("#containerTags").append('<li><a href="#myCanvas" onClick="mostrarActor(' + i + ')">' + nombreActor + '</a></li>');
+    }
+        if(!$('#myCanvas').tagcanvas({
+            textColour: '#ff0000',
+            outlineThickness: 1,
+            outlineColour: '#000000',
+            maxSpeed: 0.03,
+            depth: 0.75
+        }, 'tags')) {
+            $('#myCanvasContainer').hide();
+        }
+}
+
+function mostrarActor(i){
+    var result1 = sessionStorage.getItem("actoresPrincipales").split(",");
+    var infoActor = result1[i].split(";");
+    var nombreActor = infoActor[0].substring(infoActor[0].indexOf("name") + 8, infoActor[0].length - 2);
+    var fechaNacimiento = parseInt(infoActor[3].substring(infoActor[3].indexOf("dateOfBirth") + 15, infoActor[3].length - 2));
+    var fechaMuerte = parseInt(infoActor[4].substring(infoActor[4].indexOf("dateOfDecease") + 17, infoActor[4].length - 2));
+    var imagen = infoActor[6].substring(infoActor[6].indexOf("imageUrl") + 12, infoActor[6].length - 2);
+    var edad = fechaMuerte - fechaNacimiento;
+    var result2 = sessionStorage.getItem("cantidadPeliculasActores");
+    result2 = result2.replace('[', "");
+    result2 = result2.replace(']', "");
+    result2 = result2.replace('\r\n', "");
+    result2 = result2.split(', ');
+    $("#nombreActor").empty();
+    $("#fichaActor").empty();
+    $("#fotoActor").empty();
+    $("#nombreActor").append('<h5 class="card-title">' + nombreActor + '</h5>');
+    $("#fichaActor").append('<li class="list-group-item">Nacimiento: ' + fechaNacimiento + '</li>');
+    if(fechaMuerte !== -1){
+        $("#fichaActor").append('<li class="list-group-item">Muerte: ' + fechaMuerte + '</li>');
+    }
+    $("#fichaActor").append('<li class="list-group-item">Películas hechas: ' + result2[i] + '</li>');
+    $("#fotoActor").append('<img class="card-img-top" src="https://image.tmdb.org/t/p/w300' + imagen + '">');
+    addActorPie(nombreActor,result2[i]);
+}
+
+function addActorPie(nombre, pelis) {
+    var visitedActor = false;
+    for (var i = 0; i < datosActores.length; i++) {
+        if(datosActores[i].name === nombre){
+            visitedActor = true;
+        }
+    }
+    if(visitedActor === false){
+        datosActores.push({
+            name: nombre,
+            y: parseInt(pelis)          
+        }); 
+        Highcharts.chart('actorsPie', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Películas hechas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Películas',
+                    colorByPoint: true,
+                    data: datosActores
+                }]
+        });
+    }
+}
+;

@@ -30,12 +30,6 @@
         <script src="partPrivada.js" type="text/javascript"></script>
         <script src="login.js" type="text/javascript"></script>
         <script type="text/javascript">
-            function getParPerNom(name) {
-                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                        results = regex.exec(location.search);
-                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
             $(document).ready(function () {
                 if (!$('#myCanvas').tagcanvas({
                     textColour: '#ff0000',
@@ -46,7 +40,6 @@
                 }, 'tags')) {
                     $('#myCanvasContainer').hide();
                 }
-                $("#param").html(getParPerNom("persona"))
             });
         </script>
     </head>
@@ -110,56 +103,64 @@
 
             </div>
 
-            <div class ="row">
-                <div class="row col-lg-12>
-                     <h1>Películas por persona</h1>
-                     <div class="col-lg-6">
-                     <p id="param"></p>
+            
+            <!--Nube de actores-->
+            <div class="row col-lg-12">
+                <div class="col-lg-12">
+                    <h1>Películas por persona</h1>
+                </div>
+                <div class="col-lg-4 text-center">
                     <div id="myCanvasContainer">
-                        <canvas width="300" height="300" id="myCanvas" style="background: url('imatges/fons.jpg')">
+                        <canvas width="300" height="300" id="myCanvas" style="background: url('imatges/fons.jpg');background-size: cover;background-position: center;">
                             <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
                         </canvas>
                     </div>
-
                     <div id="tags">
-                        <ul>
-                            <li><a href="http://www.google.com" target="_blank">Google</a></li>
-                            <li><a href="http://www.uib.es">primer UIB</a></li>
-                            <li><a href="http://www.uib.es">segon UIB</a></li>
-                            <li><a href="http://www.uib.es">tercer UIB</a></li>
-                            <li><a href="http://www.uib.es">quart UIB</a></li>
-                            <li><a href="index.jsp?persona=González">paràmetre1</a></li>
-                            <li><a href="index.jsp?persona=Fernández">paràmetre2</a></li>
+                        <ul id="containerTags">
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- /.container -->
-        <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Log In</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="card-group col-lg-4">
+                    <div class="card">
+                        <div id="fotoActor"></div>
                     </div>
-                    <div class="modal-body">
-                        <div id="loginError"></div>
-                        <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
-                                <div class="invalid-feedback">Debes rellenar este campo.</div>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
-                                <div class="invalid-feedback">Debes rellenar este campo.</div>
-                            </div>
+                    <div class="card">
+                        <div class="card-body" id="nombreActor"></div>
+                        <ul class="list-group list-group-flush" id="fichaActor"></ul>
+                    </div>
+                </div>
+                <div class="col-lg-4" id="actorsPie">
+                </div>
+            </div>
 
-                            <div class="form-group text-center py-4">
-                                <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
-                            </div>
-                        </form>
+            
+            <h1><br></h1>
+            
+            <!-- /.container -->
+            <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Log In</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="loginError"></div>
+                            <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
+                                    <div class="invalid-feedback">Debes rellenar este campo.</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
+                                    <div class="invalid-feedback">Debes rellenar este campo.</div>
+                                </div>
+
+                                <div class="form-group text-center py-4">
+                                    <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
