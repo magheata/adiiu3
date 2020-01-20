@@ -16,7 +16,11 @@ $(document).ready(function () {
         $("#pageContent").empty();
         $("#pageContent").append('<div class="card" style="margin: 30px"><div class="card-body">Debes loguearte para acceder a esta página</div></div>');
     }
-        var data = [
+    sessionStorage.setItem("tipo1Selected", false);
+    sessionStorage.setItem("tipo2Selected", false);
+    sessionStorage.setItem("tipo3Selected", false);
+
+    var data = [
         ['eu', 0],
         ['oc', 0],
         ['af', 0],
@@ -41,6 +45,7 @@ function getMovieInformationType1() {
         sessionStorage.setItem("tipo1Selected", true);
         getMoviesRatingUnder5();
     }
+    chart();
 }
 
 function getMovieInformationType2() {
@@ -57,22 +62,24 @@ function getMovieInformationType2() {
         sessionStorage.setItem("tipo2Selected", true);
         getMoviesRatingBetween5And7();
     }
+    chart();
 }
 
 function getMovieInformationType3() {
     pelisTipo3Done = 0;
     var element = document.getElementById("peliCat3");
     if (element.classList.contains("active")) {
+        sessionStorage.setItem("tipo3Selected", false);
         element.classList.remove("active");
         tipo3DeleteMap = true;
         $('.type3movies').remove();
-        sessionStorage.setItem("tipo3Selected", false);
         deleteFromMap("paisesMapaTipo3");
     } else {
         element.classList.add("active");
         sessionStorage.setItem("tipo3Selected", true);
         getMoviesRatingOver7();
     }
+    chart();
 }
 
 function getMoviesRatingUnder5() {
@@ -239,51 +246,327 @@ function chart() {
     var p2 = parseInt(sessionStorage.getItem("cantidadPeliculas2"));
     var p3 = parseInt(sessionStorage.getItem("cantidadPeliculas3"));
 
-    Highcharts.chart('chartsRegion', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie',
-            height: 300,
-            width: 300
-        },
-        title: {
-            text: 'Edad de las personas por conjuntos'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+    var tipo1Selected = sessionStorage.getItem("tipo1Selected");
+    var tipo2Selected = sessionStorage.getItem("tipo2Selected");
+    var tipo3Selected = sessionStorage.getItem("tipo3Selected");
+
+    if ((tipo1Selected === "true") && (tipo2Selected === "true") && (tipo3Selected === "true")) {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
                 }
-            }
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-                name: 'Edades',
-                colorByPoint: true,
-                data: [{
-                        name: '< 5',
-                        y: p1,
-                        sliced: true,
-                        selected: true
-                    }, {
-                        name: 'entre 6 y 8',
-                        y: p2
-                    }, {
-                        name: '> 8',
-                        y: p3
-                    }]
-            }]
-    });
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: [{
+                            name: '< 6',
+                            y: p1
+                        }, {
+                            name: 'entre 6 y 9',
+                            y: p2
+                        }, {
+                            name: '> 9',
+                            y: p3
+                        }]
+                }]
+        });
+    } else if ((tipo1Selected === "true") && (tipo2Selected === "true")) {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: [{
+                            name: '< 6',
+                            y: p1
+                        }, {
+                            name: 'entre 6 y 9',
+                            y: p2
+                        }]
+                }]
+        });
+    } else if ((tipo1Selected === "true") && (tipo3Selected === "true")) {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: [{
+                            name: '< 6',
+                            y: p1
+                        }, {
+                            name: '> 9',
+                            y: p3
+                        }]
+                }]
+        });
+    } else if ((tipo2Selected === "true") && (tipo3Selected === "true")) {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: [{
+                            name: 'entre 6 y 9',
+                            y: p2
+                        }, {
+                            name: '> 9',
+                            y: p3
+                        }]
+                }]
+        });
+    } else if (tipo1Selected === "true") {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: [{
+                            name: '< 6',
+                            y: p1
+                        }]
+                }]
+        });
+    } else if (tipo2Selected === "true") {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: [{
+                            name: 'entre 6 y 9',
+                            y: p2
+                        }]
+                }]
+        });
+    } else if (tipo3Selected === "true") {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: [{
+                            name: '> 9',
+                            y: p3
+                        }]
+                }]
+        });
+    } else {
+        Highcharts.chart('chart', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                height: 300,
+                width: 300
+            },
+            title: {
+                text: 'Categorías de películas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                    name: 'Nota',
+                    colorByPoint: true,
+                    data: []
+                }]
+        });
+    }
 }
 
 function continentRegistered(country) {
@@ -308,7 +591,7 @@ function convertStringToMultidimensionalArray(string) {
     var array = [[]];
     var auxString = string.split(",");
 
-    for (var j = 1; j < auxString.length - 3; j = j + 2)
+    for (var j = 1; j <= auxString.length - 2; j = j + 2)
     {
         var newItem = [auxString[j], auxString[j + 1]];
         array.push(newItem);
@@ -320,16 +603,23 @@ function convertMapDataToArray(string) {
     var array = [[]];
     var auxString = string.split(",");
 
-    for (var j = 0; j < auxString.length - 2; j = j + 2)
+    for (var j = 0; j <= auxString.length - 2; j = j + 2)
     {
         var newItem = [auxString[j], auxString[j + 1]];
         array.push(newItem);
     }
-    return array;
+
+    var auxArray = [];
+
+    for (var k = 0; k <= array.length - 1; k++) {
+        auxArray[k] = array[k + 1];
+    }
+    return auxArray;
 }
 
 function getTotalMoviesPerContinent(data, listaPaises, paisesMapaTipo) {
     var listaPaisesMapa = sessionStorage.getItem(listaPaises);
+
     if (listaPaisesMapa === null) {
         var paisesArray = [[]];
         if (listaPaises !== null) {
@@ -349,7 +639,7 @@ function getTotalMoviesPerContinent(data, listaPaises, paisesMapaTipo) {
                             result = result.replace(/\n/ig, '');
                             var newContinent = [pais, result];
                             var continentsList = [[]];
-                            if (continentsListStorage !== "null") {
+                            if (continentsListStorage !== null) {
                                 var continentsList = convertStringToMultidimensionalArray(continentsListStorage);
                             }
                             continentsList.push(newContinent);
@@ -422,24 +712,34 @@ function getTotalMoviesPerContinent(data, listaPaises, paisesMapaTipo) {
 
 
 function deleteFromMap(paisesMapaTipo) {
-
-    var data = convertStringToMultidimensionalArray(sessionStorage.getItem("dataMap"));
-
-    var listaPaises = convertStringToMultidimensionalArray(sessionStorage.getItem(paisesMapaTipo));
-
-    var newData = [];
+    var data = convertMapDataToArray(sessionStorage.getItem("dataMap"));
+    data.pop();
+    var listaPaises = convertMapDataToArray(sessionStorage.getItem(paisesMapaTipo));
+    listaPaises.pop();
+    var max = 0;
     for (var i = 0; i < data.length; i++) {
-        newData[i] = parseInt(data[i][1]) - parseInt(listaPaises[i][1]);
+        data[i][0] = listaPaises[i][0];
+        data[i][1] = parseInt(data[i][1]) - parseInt(listaPaises[i][1]);
+        if (data[i][1] > max) {
+            max = data[i][1];
+        }
     }
+    sessionStorage.setItem("dataMap", data);
+    paintMap(data, max);
+}
 
+function paintMap(data, max) {
+    $('.map').remove();
 // Create the chart
-    Highcharts.mapChart('chartsRegion', {
+    Highcharts.mapChart('map', {
         chart: {
-            map: 'custom/world-continents'
+            map: 'custom/world-continents',
+            height: 300,
+            width: 300
         },
 
         title: {
-            text: 'Highmaps basic demo'
+            text: 'Películas por país de orígen'
         },
 
         subtitle: {
@@ -451,11 +751,14 @@ function deleteFromMap(paisesMapaTipo) {
         },
 
         colorAxis: {
-            min: 0
+            min: 0,
+            startOnTick: false,
+            endOnTick: false,
+            max: max
         },
 
         series: [{
-                data: newData,
+                data: data,
                 name: 'Total peliculas',
                 states: {
                     hover: {
@@ -468,57 +771,40 @@ function deleteFromMap(paisesMapaTipo) {
                 }
             }]
     });
+
 }
-
-
 function addToMap(listaPaisesTipo, paisesMapaTipo) {
 
     var newData = [];
 
-    var data = sessionStorage.getItem("dataMap");
+    var data = convertMapDataToArray(sessionStorage.getItem("dataMap"));
     var dataPais = sessionStorage.getItem(paisesMapaTipo);
-    
-    if (dataPais === null){
-        newData = getTotalMoviesPerContinent(data, sessionStorage.getItem(listaPaisesTipo), paisesMapaTipo);
+
+    if (dataPais === null) {
+        var newDataAux = getTotalMoviesPerContinent(data, sessionStorage.getItem(listaPaisesTipo), paisesMapaTipo);
+        newDataAux.pop();
+        newData = newDataAux;
+    } else {
+        var dataPaisArray = convertMapDataToArray(dataPais);
+        dataPaisArray.pop();
+        var max = 0;
+        for (var i = 0; i < dataPaisArray.length; i++) {
+            dataPaisArray[i][1] = parseInt(data[i][1]) + parseInt(dataPaisArray[i][1]);
+            if (dataPaisArray[i][1] > max) {
+                max = dataPaisArray[i][1];
+            }
+        }
+        newData = dataPaisArray;
     }
 
-
+    var max = 0;
     sessionStorage.setItem("dataMap", newData);
-
-// Create the chart
-    Highcharts.mapChart('chartsRegion', {
-        chart: {
-            map: 'custom/world-continents'
-        },
-
-        title: {
-            text: 'Highmaps basic demo'
-        },
-
-        subtitle: {
-            text: 'Source map: <a href="http://code.highcharts.com/mapdata/custom/world-continents.js">World continents</a>'
-        },
-
-        mapNavigation: {
-            enabled: false
-        },
-
-        colorAxis: {
-            min: 0
-        },
-
-        series: [{
-                data: newData,
-                name: 'Total peliculas',
-                states: {
-                    hover: {
-                        color: '#BADA55'
-                    }
-                },
-                dataLabels: {
-                    enabled: true,
-                    format: '{point.name}'
-                }
-            }]
-    });
+    for (var k = 0; k < newData.length; k++) {
+        newData[k][1] = parseInt(newData[k][1]);
+        var aux = parseInt(newData[k][1]);
+        if (aux > max) {
+            max = aux;
+        }
+    }
+    paintMap(newData, max);
 }
