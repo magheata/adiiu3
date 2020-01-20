@@ -37,7 +37,7 @@
                 return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
             }
             $(document).ready(function () {
-                if(!$('#myCanvas').tagcanvas({
+                if (!$('#myCanvas').tagcanvas({
                     textColour: '#ff0000',
                     outlineThickness: 1,
                     outlineColour: '#000000',
@@ -109,72 +109,72 @@
                 <!-- /.row -->
 
             </div>
-            
+
             <div class ="row">
                 <div class="row col-lg-12>
-                    <h1>Películas por persona</h1>
-                    <div class="col-lg-6">
-                        <p id="param"></p>
-                        <div id="myCanvasContainer">
-                            <canvas width="300" height="300" id="myCanvas" style="background: url('imatges/fons.jpg')">
-                                <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
-                            </canvas>
-                        </div>
-
-                        <div id="tags">
-                            <ul>
-                                <li><a href="http://www.google.com" target="_blank">Google</a></li>
-                                <li><a href="http://www.uib.es">primer UIB</a></li>
-                                <li><a href="http://www.uib.es">segon UIB</a></li>
-                                <li><a href="http://www.uib.es">tercer UIB</a></li>
-                                <li><a href="http://www.uib.es">quart UIB</a></li>
-                                <li><a href="index.jsp?persona=González">paràmetre1</a></li>
-                                <li><a href="index.jsp?persona=Fernández">paràmetre2</a></li>
-                            </ul>
-                        </div>
+                     <h1>Películas por persona</h1>
+                     <div class="col-lg-6">
+                     <p id="param"></p>
+                    <div id="myCanvasContainer">
+                        <canvas width="300" height="300" id="myCanvas" style="background: url('imatges/fons.jpg')">
+                            <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
+                        </canvas>
                     </div>
-                </div>
-            </div>
-            
-            <!-- /.container -->
-            <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3>Log In</h3>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        </div>
-                        <div class="modal-body">
-                            <div id="loginError"></div>
-                            <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
-                                    <div class="invalid-feedback">Debes rellenar este campo.</div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
-                                    <div class="invalid-feedback">Debes rellenar este campo.</div>
-                                </div>
 
-                                <div class="form-group text-center py-4">
-                                    <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div id="tags">
+                        <ul>
+                            <li><a href="http://www.google.com" target="_blank">Google</a></li>
+                            <li><a href="http://www.uib.es">primer UIB</a></li>
+                            <li><a href="http://www.uib.es">segon UIB</a></li>
+                            <li><a href="http://www.uib.es">tercer UIB</a></li>
+                            <li><a href="http://www.uib.es">quart UIB</a></li>
+                            <li><a href="index.jsp?persona=González">paràmetre1</a></li>
+                            <li><a href="index.jsp?persona=Fernández">paràmetre2</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Bootstrap core JavaScript -->
-        <!--<script src="vendor/jquery/jquery.min.js"></script>-->
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Footer -->
-        <footer class="py-5 bg-dark" id ="footer">
-            <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; PelisWeb (Andreea & Pablo) 2020</p>
+        <!-- /.container -->
+        <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Log In</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="loginError"></div>
+                        <form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="user" id="uname1" required="" placeholder="Usuario">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="pass" id="pass" required="" placeholder="Contraseña">
+                                <div class="invalid-feedback">Debes rellenar este campo.</div>
+                            </div>
+
+                            <div class="form-group text-center py-4">
+                                <button type="submit" class="btn btn-dark" id="btnLogin">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <!-- /.container -->
-        </footer>
-    </body>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript -->
+    <!--<script src="vendor/jquery/jquery.min.js"></script>-->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark" id ="footer">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; PelisWeb (Andreea & Pablo) 2020</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+</body>
 </html>

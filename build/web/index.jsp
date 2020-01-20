@@ -17,6 +17,8 @@
         <!-- Custom styles for this template -->
         <link href="css/shop-homepage.css" rel="stylesheet">
         <script src="jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+        <script src="https://code.highcharts.com/mapdata/custom/world-continents.js"></script>
         <script src="highcharts.js"></script>
         <script src="exporting.js"></script>
         <script src="export-data.js"></script>
@@ -51,8 +53,25 @@
         </H1>
         <div id="espera">
         </div>
-        <div id="container" class="col-md-6" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-        <div id="containerBarras" class="col-md-6" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+        <div class ="row">
+            <div class ="col-lg 6" id ="container"style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+
+            </div>
+            <div class ="col-lg 6" id = "containerBarras"style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+
+            </div>
+        </div>
+        <div class ="row">
+            <div class ="col-lg 6" id ="containerVivos"style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto">
+
+            </div>
+            <div class ="row col-lg 6">
+                <div class ="col-md-3 justify-content-center align-items-center" id ="regionBotones">
+                    
+                </div>
+                <div class ="col-md-10" id ="containerMapa"style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+            </div>
+        </div>
         <!--Login modal-->
         <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">

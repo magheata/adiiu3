@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //Logged
     if(sessionStorage.getItem("hasAccess") === "true"){
-        $("#navbarMenu").append('<li class="nav-item"><a class="nav-link" href="" id="btnLogout">Log Out</a></li>');
+        $("#navbarMenu").append('<li class="nav-item"><a class="nav-link" href="index.jsp" id="btnLogout">Log Out</a></li>');
     }else{
         $("#navbarMenu").append('<li class="nav-item"><a class="nav-link" href="#LoginModal" data-toggle="modal">Log In</a></li>');
     }

@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 body {
-  padding-top: 56px;
+    padding-top: 56px;
 }
 
 .peliCat{
@@ -45,4 +45,9 @@ body {
 
 .list-group{
     text-align: center;
+}
+
+.buttonMap {
+    width: 100%;
+    margin: 10px;
 }
