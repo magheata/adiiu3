@@ -30,15 +30,9 @@
         <script src="partPrivada.js" type="text/javascript"></script>
         <script src="login.js" type="text/javascript"></script>
         <script type="text/javascript">
-            function getParPerNom(name) {
-                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-                        results = regex.exec(location.search);
-                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-            }
             $(document).ready(function () {
                 if(!$('#myCanvas').tagcanvas({
-                    textColour: '#ff0000',
+                    textColour: '#B44010',
                     outlineThickness: 1,
                     outlineColour: '#000000',
                     maxSpeed: 0.03,
@@ -46,7 +40,6 @@
                 }, 'tags')) {
                     $('#myCanvasContainer').hide();
                 }
-                $("#param").html(getParPerNom("persona"))
             });
         </script>
     </head>
@@ -110,24 +103,36 @@
 
             </div>
             
-            <div class ="row">
-                <div class="row col-lg-12>
+            <!--Nube de actores-->
+            <div class="row col-lg-12">
+                <div class="col-lg-12">
                     <h1>Películas por persona</h1>
-                    <div class="col-lg-6">
-                        <p id="param"></p>
-                        <div id="myCanvasContainer">
-                            <canvas width="300" height="300" id="myCanvas" style="background: url('imatges/fons.jpg')">
-                                <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
-                            </canvas>
-                        </div>
-
-                        <div id="tags">
-                            <ul id="containerTags">
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div id="myCanvasContainer">
+                        <canvas width="300" height="300" id="myCanvas" style="background: url('imatges/fons.jpg');background-size: cover;background-position: center;">
+                            <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
+                        </canvas>
+                    </div>
+                    <div id="tags">
+                        <ul id="containerTags">
+                        </ul>
                     </div>
                 </div>
+                <div class="card-group col-lg-4">
+                    <div class="card">
+                        <div id="fotoActor"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="nombreActor"></div>
+                        <ul class="list-group list-group-flush" id="fichaActor"></ul>
+                    </div>
+                </div>
+                <div class="col-lg-4" id="actorsPie">
+                </div>
             </div>
+            
+            <h1><br></h1>
             
             <!-- /.container -->
             <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">

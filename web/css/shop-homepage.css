@@ -39,9 +39,9 @@ body {
     margin-bottom: 5px;
 }
 
-.list-group-item:first-child {
+/*.list-group-item:first-child {
     margin-left: 31px;
-}
+}*/
 
 .list-group{
     text-align: center;

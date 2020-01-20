@@ -154,7 +154,6 @@ function getMoviesAndActors() {
                 result2 = result2.split(', ').map(function (item) {
                     return parseInt(item, 10);
                 });
-                ;
                 pppelis = result2;
                 acumPP++;
             }});
