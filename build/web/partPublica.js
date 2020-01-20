@@ -33,7 +33,7 @@ function loadCacheElements() {
 function getMoviesRatingUnder5Count() {
     result = sessionStorage.getItem("cantidadPeliculas1");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=0-5",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=0-5",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas1", result);
                 p1 = parseInt(result);
@@ -49,7 +49,7 @@ function getMoviesRatingUnder5Count() {
 function getMoviesRatingBetween5And7Count() {
     result = sessionStorage.getItem("cantidadPeliculas2");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=6-8",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=6-8",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas2", result);
                 p2 = parseInt(result);
@@ -66,7 +66,7 @@ function getMoviesRatingBetween5And7Count() {
 function getMoviesRatingOver7Count() {
     result = sessionStorage.getItem("cantidadPeliculas3");
     if (result === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=9-10",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisderatingcount&par=9-10",
             success: function (result) {
                 sessionStorage.setItem("cantidadPeliculas3", result);
                 p3 = parseInt(result);
@@ -90,7 +90,7 @@ function getMoviesAndActors() {
     result1 = sessionStorage.getItem("actoresPrincipales");
     result2 = sessionStorage.getItem("cantidadPeliculasActores");
     if (result1 === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=personas",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=personas",
             success: function (result1) {
                 sessionStorage.setItem("actoresPrincipales", result1);
                 //String to array
@@ -111,7 +111,7 @@ function getMoviesAndActors() {
         acumPP++;
     }
     if (result2 === null) {
-        $.ajax({url: "http://localhost:8080/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=pelis",
+        $.ajax({url: "http://localhost:18669/PeliculesWeb_2/bdpeliculas?op=pelisporactor&par=pelis",
             success: function (result2) {
                 sessionStorage.setItem("cantidadPeliculasActores", result2);
                 //String to array

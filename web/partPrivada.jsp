@@ -26,9 +26,29 @@
         <script src="exporting.js"></script>
         <script src="export-data.js"></script>
         <script src="jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="jquery.tagcanvas.min.js" type="text/javascript"></script>
         <script src="partPrivada.js" type="text/javascript"></script>
         <script src="login.js" type="text/javascript"></script>
-
+        <script type="text/javascript">
+            function getParPerNom(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                        results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            $(document).ready(function () {
+                if(!$('#myCanvas').tagcanvas({
+                    textColour: '#ff0000',
+                    outlineThickness: 1,
+                    outlineColour: '#000000',
+                    maxSpeed: 0.03,
+                    depth: 0.75
+                }, 'tags')) {
+                    $('#myCanvasContainer').hide();
+                }
+                $("#param").html(getParPerNom("persona"))
+            });
+        </script>
     </head>
 
     <body>
@@ -88,6 +108,33 @@
                 <!-- /.row -->
 
             </div>
+            
+            <div class ="row">
+                <div class="row col-lg-12>
+                    <h1>Películas por persona</h1>
+                    <div class="col-lg-6">
+                        <p id="param"></p>
+                        <div id="myCanvasContainer">
+                            <canvas width="300" height="300" id="myCanvas" style="background: url('imatges/fons.jpg')">
+                                <p>In Internet Explorer versions up to 8, things inside the canvas are inaccessible!</p>
+                            </canvas>
+                        </div>
+
+                        <div id="tags">
+                            <ul>
+                                <li><a href="http://www.google.com" target="_blank">Google</a></li>
+                                <li><a href="http://www.uib.es">primer UIB</a></li>
+                                <li><a href="http://www.uib.es">segon UIB</a></li>
+                                <li><a href="http://www.uib.es">tercer UIB</a></li>
+                                <li><a href="http://www.uib.es">quart UIB</a></li>
+                                <li><a href="index.jsp?persona=González">paràmetre1</a></li>
+                                <li><a href="index.jsp?persona=Fernández">paràmetre2</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- /.container -->
             <div id="LoginModal" class="modal fade modal-login" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -118,7 +165,7 @@
             </div>
         </div>
         <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
+        <!--<script src="vendor/jquery/jquery.min.js"></script>-->
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Footer -->
