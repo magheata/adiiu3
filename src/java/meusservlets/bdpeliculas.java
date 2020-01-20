@@ -18,6 +18,7 @@ import perbd.DBActionsPersonaPeli;
 import perbd.DBActionsPoblaciones;
 import perbd.DBActionsRatingPelis;
 import perbd.DBActionsUsers;
+import perbd.GeolocationService;
 import perbd.MovieService;
 
 /**
@@ -134,6 +135,10 @@ public class bdpeliculas extends HttpServlet {
         {
             MovieService movieService = new MovieService();
             res = movieService.GetMoviesInfo(par);
+        } else if (operacion.contentEquals("getContinent"))
+        {
+            GeolocationService geolocationService = new GeolocationService();
+            res = geolocationService.GetContinent(par);
         }
         return res;
     }
