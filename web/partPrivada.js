@@ -202,12 +202,13 @@ function parseAPIResponse(peliculasTipoInfo, typeMovie, listaPaisesNombre) {
             }
         }
 
-        //var actoresPelicula = peliculaActual[3].split("$");
-        //for (j = 0; j < actoresPelicula.length; j++){
-        //    var actorActual = actoresPelicula[j].split(";");
-        //    var nombreActor = actorActual[0].substring(actorActual[0].indexOf("name") + 7, actorActual[0].length - 1);
-        //    var paisNacimientoActor = actorActual[1].substring(actorActual[1].indexOf("name") + 7, actorActual[1].length - 1);
-        // }
+        var actoresPelicula = peliculaActual[3].split("$");
+        for (j = 0; j < actoresPelicula.length; j++){
+            var actorActual = actoresPelicula[j].split(";");
+            var nombreActor = actorActual[0].substring(actorActual[0].indexOf("name") + 7, actorActual[0].length - 1);
+            var paisNacimientoActor = actorActual[1].substring(actorActual[1].indexOf("name") + 7, actorActual[1].length - 1);
+        }
+        
         var movieString = "<div class=\"col-lg-4 col-md-6 mb-4 " + typeMovie + "\">" +
                 "<div class=\"card h-100\">" +
                 "<a href=\"#\"><img class=\"card-img-top\" src=\"http://placehold.it/700x400\" alt=\"\"></a>" +
