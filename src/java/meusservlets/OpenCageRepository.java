@@ -17,12 +17,13 @@ import java.util.logging.Logger;
  * @author andreea
  */
 public class OpenCageRepository {
+
     private String API_KEY = "5473ec3a23c946d996fa5fcca9abc145";
-    
-    public String GetContinent(String input){        
+
+    public String GetContinent(String input) {
         StringBuilder content = new StringBuilder();
         try {
-            URL url = new URL("https://api.opencagedata.com/geocode/v1/json?key="+ API_KEY + "&q="+ input + "&pretty=1");
+            URL url = new URL("https://api.opencagedata.com/geocode/v1/json?key=" + API_KEY + "&q=" + input + "&pretty=1");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             int status = con.getResponseCode();
@@ -38,24 +39,32 @@ public class OpenCageRepository {
             Logger.getLogger(MovieDBRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         String aux = content.toString();
-        int indexFirst = aux.indexOf("continent") + 14;
-        int indexLast = aux.substring(indexFirst, aux.length() - 1).indexOf(",");
-        String continent = aux.substring(indexFirst, (indexFirst + indexLast) - 1);
-        switch(continent){
-            case "Europe":
-                return "eu";
-            case "North America":
-                return "na";
-            case "Asia":
-                return "as";
-            case "Oceania":
-                return "oc";
-            case "Africa":
-                return "af";
-            case "South America":
-                return "sa";
-            default:
+        if (!aux.equals("")) {
+            int indexFirst = aux.indexOf("continent") + 14;
+            int indexLast = aux.substring(indexFirst, aux.length() - 1).indexOf(",");
+            if ((indexFirst > -1) && (indexLast > -1)) {
+                String continent = aux.substring(indexFirst, (indexFirst + indexLast) - 1);
+                switch (continent) {
+                    case "Europe":
+                        return "eu";
+                    case "North America":
+                        return "na";
+                    case "Asia":
+                        return "as";
+                    case "Oceania":
+                        return "oc";
+                    case "Africa":
+                        return "af";
+                    case "South America":
+                        return "sa";
+                    default:
+                        return "";
+                }
+            } else {
                 return "";
+            }
+        } else {
+            return "";
         }
     }
 }

@@ -4,9 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/meusservlets/MovieDBRepository.java</file>
+            <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/perbd/DBConnection.java</file>
+            <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/datamodels/Movie.java</file>
             <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/perbd/GeolocationService.java</file>
             <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/perbd/MovieService.java</file>
+            <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/perbd/DBActionsPeliculas.java</file>
+            <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/perbd/DBActionsUsers.java</file>
+            <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/perbd/ActorService.java</file>
             <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/meusservlets/OpenCageRepository.java</file>
+            <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/datamodels/Actor.java</file>
+            <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/perbd/DBActionsPersonaPeli.java</file>
             <file>file:/Users/andreea/Desktop/19-20/adiu/Prac3/PeliculesWebGIT/adiiu3/src/java/meusservlets/bdpeliculas.java</file>
         </group>
     </open-files>
